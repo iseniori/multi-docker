@@ -3,21 +3,21 @@ services:
     - docker
 
 before_install:
-    - docker build -t vsemeniuk/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t iseniori/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run vsemeniuk/react-test npm test -- --coverage
+    - docker run iseniori/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t vsemeniuk/multi-client ./client
-    - docker build -t vsemeniuk/multi-nginx ./nginx
-    - docker build -t vsemeniuk/multi-server ./server
-    - docker build -t vsemeniuk/multi-worker ./worker
+    - docker build -t iseniori/multi-client ./client
+    - docker build -t iseniori/multi-nginx ./nginx
+    - docker build -t iseniori/multi-server ./server
+    - docker build -t iseniori/multi-worker ./worker
 #Login to docker CLI    
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # Take images and pust them to Docker hub
-    - docker push vsemeniuk/multi-client
-    - docker push vsemeniuk/multi-nginx
-    - docker push vsemeniuk/multi-server
-    - docker push vsemeniuk/multi-worker
+    - docker push iseniori/multi-client
+    - docker push iseniori/multi-nginx
+    - docker push iseniori/multi-server
+    - docker push iseniori/multi-worker
     
